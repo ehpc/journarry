@@ -1,0 +1,9 @@
+alias(
+    name = "web",
+    actual = "//web:next_build",
+)
+
+alias(
+    name = "llm_worker",
+    actual = "//llm_worker:build_release",
+)
