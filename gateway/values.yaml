@@ -1,0 +1,5 @@
+namespace: journarry-dev
+listeners:
+  - name: http
+    protocol: HTTP
+    port: 80

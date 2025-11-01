@@ -1,0 +1,14 @@
+apiVersion: k3d.io/v1alpha5
+kind: Simple
+metadata:
+  name: journarry-dev
+ports:
+  - port: 8080:80
+    nodeFilters:
+      - loadbalancer
+registries:
+  create:
+    name: journarry.dev
+    host: "0.0.0.0"
+    hostPort: "5000"
+

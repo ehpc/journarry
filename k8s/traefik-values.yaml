@@ -1,0 +1,5 @@
+providers:
+  kubernetesGateway:
+    enabled: true
+ingressClass:
+  enabled: false

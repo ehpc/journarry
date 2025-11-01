@@ -1,0 +1,18 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: {{ include "journarry-gateway.fullname" . }}
+  namespace: {{ .Values.namespace }}
+spec:
+  gatewayClassName: traefik
+
+  listeners:
+  {{- range .Values.listeners }}
+    - name: {{ .name }}
+      protocol: {{ .protocol }}
+      port: {{ .port }}
+      {{- if .hostname }}hostname: "{{ .hostname }}"{{- end }}
+      allowedRoutes:
+        namespaces:
+          from: Same 
+  {{- end }}
