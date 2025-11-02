@@ -1,8 +1,9 @@
 [tools]
 yq = "4.48"
+jq = "1.8"
 just = "1.43"
 bazelisk = "1.27"
-devspace = "6.3"
+skaffold = "latest"
 helm = "3.19"
 k3d = "5.8.3"
 bun = "1.3"

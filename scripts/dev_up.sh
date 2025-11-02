@@ -12,12 +12,14 @@ if ! k3d cluster list | grep -q "^${CLUSTER_NAME}\b"; then
 fi
 
 # Install Traefik via Helm
-helm --kube-context ${CONTEXT} repo add traefik https://traefik.github.io/charts
-helm --kube-context ${CONTEXT} repo update
-helm --kube-context ${CONTEXT} upgrade --install traefik traefik/traefik \
-  -n ${CLUSTER_NAME} \
-  --create-namespace \
-  -f ${TRAEFIK_CONFIG_PATH}
+if ! helm list -n journarry-dev -o json | jq -e 'any(.[]; .name == "traefik")' > /dev/null; then
+  helm --kube-context ${CONTEXT} repo add traefik https://traefik.github.io/charts
+  helm --kube-context ${CONTEXT} repo update
+  helm --kube-context ${CONTEXT} upgrade --install traefik traefik/traefik \
+    -n ${CLUSTER_NAME} \
+    --create-namespace \
+    -f ${TRAEFIK_CONFIG_PATH}
+fi
 
-# devspace use namespace "${NS_DEV}"
-# devspace dev -f tools/dev/devspace.yaml
+#devspace use namespace "${CLUSTER_NAME}"
+#devspace dev

@@ -1,4 +1,3 @@
-{{- if .Values.httpRoute.enabled -}}
 {{- $fullName := include "journarry-web.fullname" . -}}
 {{- $svcPort := .Values.service.port -}}
 apiVersion: gateway.networking.k8s.io/v1
@@ -8,10 +7,6 @@ metadata:
   namespace: {{ .Values.namespace }}
   labels:
     {{- include "journarry-web.labels" . | nindent 4 }}
-  {{- with .Values.httpRoute.annotations }}
-  annotations:
-    {{- toYaml . | nindent 4 }}
-  {{- end }}
 spec:
   parentRefs:
     {{- with .Values.httpRoute.parentRefs }}
@@ -36,4 +31,3 @@ spec:
           port: {{ $svcPort }}
           weight: 1
     {{- end }}
-{{- end }}

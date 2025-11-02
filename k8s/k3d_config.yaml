@@ -8,7 +8,6 @@ ports:
       - loadbalancer
 registries:
   create:
-    name: journarry.dev
+    name: localhost
     host: "0.0.0.0"
     hostPort: "5000"
-

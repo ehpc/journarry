@@ -17,6 +17,4 @@ dev-down:
 # Show development environment status
 [group('dev')]
 dev-status:
-  k3d cluster list
-  k3d registry list
-  helm ls -A
+  k3d node list
