@@ -1,0 +1,33 @@
+apiVersion: skaffold/v4beta13
+kind: Config
+metadata:
+  name: journarry
+build:
+  tagPolicy:
+    sha256: {}
+  artifacts:
+    - image: journarry-web
+      context: web
+      docker:
+        dockerfile: Dockerfile.dev
+  local:
+    push: false
+deploy:
+  helm:
+    releases:
+      - name: journarry-gateway
+        namespace: minikube-journarry
+        chartPath: k8s/gateway
+        valuesFiles:
+          - k8s/gateway/values.yaml
+          - k8s/gateway/values-dev.yaml
+
+      - name: journarry-web
+        namespace: minikube-journarry
+        chartPath: web/helm
+        valuesFiles:
+          - web/helm/values.yaml
+          - web/helm/values-dev.yaml
+        setValueTemplates:
+          image.repository: "{{.IMAGE_REPO_journarry_web}}"
+          image.tag: "{{.IMAGE_TAG_journarry_web}}@{{.IMAGE_DIGEST_journarry_web}}"

@@ -35,3 +35,5 @@ more descriptive error. Once the error is fixed and the chart can be
 rendered correctly, you can re-run `devspace init --reconfigure` to 
 generate a new devspace.yaml with the develop option selected.
 
+`sudo apt install libnss-myhostname` for *.localhost
+

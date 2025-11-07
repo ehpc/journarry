@@ -4,7 +4,7 @@ metadata:
   name: {{ include "journarry-gateway.fullname" . }}
   namespace: {{ .Values.namespace }}
 spec:
-  gatewayClassName: traefik
+  gatewayClassName: {{ include "journarry-gateway.fullname" . }}
 
   listeners:
   {{- range .Values.listeners }}
@@ -14,5 +14,5 @@ spec:
       {{- if .hostname }}hostname: "{{ .hostname }}"{{- end }}
       allowedRoutes:
         namespaces:
-          from: Same 
+          from: Same
   {{- end }}

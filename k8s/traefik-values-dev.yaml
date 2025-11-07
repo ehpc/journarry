@@ -1,0 +1,24 @@
+ports:
+  web:
+    exposedPort: 8042
+  websecure:
+    expose:
+      default: false
+ingressRoute:
+  dashboard:
+    enabled: true
+    matchRule: Host(`dashboard.localhost`)
+    entryPoints:
+      - web
+providers:
+  kubernetesGateway:
+    enabled: true
+gatewayClass:
+  enabled: false
+gateway:
+  enabled: false
+logs:
+  general:
+    level: INFO
+  access:
+    enabled: true

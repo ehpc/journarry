@@ -1,8 +1,9 @@
 replicaCount: 1
 
 image:
-  repository: localhost:5000/journarry-web
+  repository: k3d-journarry.localhost:5042/journarry-web
   pullPolicy: IfNotPresent
+  tag: ""
 
 service:
   type: ClusterIP
@@ -10,12 +11,9 @@ service:
 
 httpRoute:
   parentRefs:
-  - name: gateway
+  - name: journarry-gateway
     sectionName: http
-    # namespace: default
-  hostnames:
-  - journarry.local
-  # List of rules and filters applied.
+    kind: Gateway
   rules:
   - matches:
     - path:
